@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+
+Host: https://mahendarreddysama.github.io/
+Sitemap: https://mahendarreddysama.github.io/sitemap.xml
