@@ -1,0 +1,167 @@
+name: Publish PrimeShow Entertainment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "primeshow-entertainment/**"
+      - ".github/workflows/publish-primeshow.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-primeshow
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: primeshow-entertainment/package-lock.json
+
+      - name: Install dependencies
+        working-directory: primeshow-entertainment
+        run: npm ci --no-audit --no-fund
+
+      - name: Prepare clean static export
+        working-directory: primeshow-entertainment
+        shell: bash
+        run: |
+          if [ -d db ]; then mv db /tmp/primeshow-db; fi
+          if [ -d examples ]; then mv examples /tmp/primeshow-examples; fi
+
+          cat > next.config.mjs <<'EOF'
+          const nextConfig = {
+            output: 'export',
+            images: { unoptimized: true },
+            trailingSlash: true,
+            poweredByHeader: false,
+          };
+
+          export default nextConfig;
+          EOF
+
+          cat > tsconfig.json <<'EOF'
+          {
+            "compilerOptions": {
+              "target": "ES2017",
+              "lib": ["dom", "dom.iterable", "esnext"],
+              "allowJs": true,
+              "skipLibCheck": true,
+              "strict": true,
+              "noEmit": true,
+              "esModuleInterop": true,
+              "module": "esnext",
+              "moduleResolution": "bundler",
+              "resolveJsonModule": true,
+              "isolatedModules": true,
+              "jsx": "react-jsx",
+              "incremental": true,
+              "plugins": [{ "name": "next" }],
+              "paths": { "@/*": ["./*"] }
+            },
+            "include": [
+              "next-env.d.ts",
+              "app/**/*.js",
+              "app/**/*.jsx",
+              "app/**/*.ts",
+              "app/**/*.tsx",
+              "components/**/*.js",
+              "components/**/*.jsx",
+              "components/**/*.ts",
+              "components/**/*.tsx",
+              "content/**/*.js",
+              "content/**/*.jsx",
+              "content/**/*.ts",
+              "content/**/*.tsx",
+              "hooks/**/*.js",
+              "hooks/**/*.jsx",
+              "hooks/**/*.ts",
+              "hooks/**/*.tsx",
+              "lib/**/*.js",
+              "lib/**/*.jsx",
+              "lib/**/*.ts",
+              "lib/**/*.tsx",
+              ".next/types/**/*.ts"
+            ],
+            "exclude": [
+              "node_modules",
+              "db",
+              "examples",
+              "build",
+              "scripts",
+              "tests",
+              "worker",
+              "drizzle",
+              "vite.config.ts",
+              "drizzle.config.ts"
+            ]
+          }
+          EOF
+
+          for file in app/manifest.js app/robots.js app/sitemap.js; do
+            if [ -f "$file" ] && ! grep -q 'export const dynamic' "$file"; then
+              sed -i '1i export const dynamic = "force-static";' "$file"
+            fi
+          done
+
+      - name: Build static website
+        working-directory: primeshow-entertainment
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          NEXT_PUBLIC_SITE_URL: "https://mahendarreddysama.github.io"
+        run: npx next build
+
+      - name: Verify static export
+        shell: bash
+        run: |
+          test -f primeshow-entertainment/out/index.html
+          test -d primeshow-entertainment/out/_next
+          grep -qi "PrimeShow" primeshow-entertainment/out/index.html
+          echo "PrimeShow static export verified."
+
+      - name: Preserve export and restore uploaded source
+        shell: bash
+        run: |
+          rm -rf /tmp/primeshow-out
+          cp -a primeshow-entertainment/out /tmp/primeshow-out
+
+          git restore --worktree --staged primeshow-entertainment
+          rm -rf primeshow-entertainment/node_modules
+          rm -rf primeshow-entertainment/.next
+          rm -rf primeshow-entertainment/out
+
+      - name: Publish generated site to repository root
+        shell: bash
+        run: |
+          rm -rf _next images about contact services movies prime-hub
+          rm -f index.html 404.html favicon.ico favicon.svg manifest.webmanifest robots.txt sitemap.xml
+
+          cp -a /tmp/primeshow-out/. .
+          touch .nojekyll
+
+      - name: Commit published website
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No published-site changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Publish PrimeShow Entertainment website"
+          git push origin main
