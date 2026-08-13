@@ -1,0 +1,4 @@
+import assert from "node:assert/strict";import test from "node:test";import {createContactTarget,validateContactForm} from "../lib/validation/contact.js";
+import {siteConfig} from "../content/site.js";
+const form={name:"John Doe",company:"XYZ Studios",email:"john@example.com",phone:"+91 9876543210",service:"Production",message:"We would like to discuss an upcoming project."};
+test("accepts a complete enquiry",()=>assert.equal(validateContactForm(form).valid,true));test("rejects malformed details",()=>assert.equal(validateContactForm({...form,email:"wrong"}).valid,false));test("encodes WhatsApp messages",()=>assert.match(createContactTarget({form,whatsapp:"+91 90000 00000"}).url,/wa\.me\/919000000000/));test("uses the official WhatsApp destination",()=>assert.match(createContactTarget({form,whatsapp:siteConfig.whatsapp}).url,/wa\.me\/917842985404/));
