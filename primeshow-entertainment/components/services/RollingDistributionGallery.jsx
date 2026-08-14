@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 
 const rowOffsets = [0, 2, 4];
@@ -22,13 +22,50 @@ function galleryStyle(movie) {
 }
 
 export default function RollingDistributionGallery({ movies, compact = false }) {
+  const root = useRef(null);
   const rows = useMemo(() => rowOffsets.map((offset) => {
     const source = movies.length ? movies : [{ slug: "hanuman", title: "PrimeShow Release", poster: "/images/posters/hanuman.webp" }];
     return Array.from({ length: 10 }, (_, index) => source[(index + offset) % source.length]);
   }), [movies]);
 
+  useEffect(() => {
+    const section = root.current;
+    if (!section) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const rowEls = [...section.querySelectorAll(".distribution-roll-row")];
+    let frame = 0;
+
+    const render = () => {
+      frame = 0;
+      const rect = section.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const progress = Math.max(0, Math.min(1, (viewport - rect.top) / (viewport + rect.height)));
+      const mobile = window.matchMedia("(max-width: 700px)").matches;
+      const distance = mobile ? 90 : 240;
+      rowEls.forEach((row, index) => {
+        const direction = index % 2 === 0 ? -1 : 1;
+        const strength = 0.72 + index * 0.16;
+        row.style.transform = `translate3d(${direction * progress * distance * strength}px,0,0)`;
+      });
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(render);
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    render();
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) cancelAnimationFrame(frame);
+      rowEls.forEach(row => row.style.removeProperty("transform"));
+    };
+  }, []);
+
   return (
-    <section className={`distribution-roll ${compact ? "is-compact" : ""}`} aria-labelledby={compact ? "home-distribution-title" : "distribution-gallery-title"}>
+    <section ref={root} className={`distribution-roll ${compact ? "is-compact" : ""}`} aria-labelledby={compact ? "home-distribution-title" : "distribution-gallery-title"}>
       <div className="distribution-roll-intro container">
         <div className="distribution-roll-title">
           <div className="eyebrow">Across screens. Across borders.</div>
