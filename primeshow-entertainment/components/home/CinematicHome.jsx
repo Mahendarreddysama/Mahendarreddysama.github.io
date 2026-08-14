@@ -7,6 +7,7 @@ import { ArrowDown, ArrowRight, Boxes, Clapperboard, ExternalLink, Film, Globe2,
 import ProcessImpact from "./ProcessImpact";
 import HomeContact from "./HomeContact";
 import Brand from "@/components/layout/Brand";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 import RollingDistributionGallery from "@/components/services/RollingDistributionGallery";
 
 function MagneticButton({ href, className = "", icon = "right", children }) {
@@ -47,11 +48,12 @@ function Navigation({ items }) {
         <div className="desktop-nav">
           {items.map((item) => <a key={item.label} className={active === item.href ? "active" : ""} href={item.href}>{item.label}</a>)}
         </div>
-        <div className="nav-action"><MagneticButton href="#contact" className="button-gold">Collaborate</MagneticButton></div>
+        <div className="nav-tools"><ThemeToggle /><div className="nav-action"><MagneticButton href="#contact" className="button-gold">Collaborate</MagneticButton></div></div>
         <button className="menu-toggle" aria-label="Open navigation" aria-expanded={open} onClick={() => setOpen(true)}><Menu /></button>
       </nav>
       <div className="mobile-menu" style={{ clipPath: open ? "circle(150% at 88% 7%)" : "circle(0% at 88% 7%)", visibility: open ? "visible" : "hidden", transition: "clip-path .42s cubic-bezier(.76,0,.24,1)" }} aria-hidden={!open} inert={!open ? true : undefined}>
         <button className="menu-close" aria-label="Close navigation" onClick={() => setOpen(false)}><X /></button>
+        <ThemeToggle mobile />
         <div className="mobile-links">{items.map((item, index) => <a key={item.label} href={item.href} onClick={() => setOpen(false)}><small>0{index + 1}</small>{item.label}</a>)}<a href="#contact" onClick={() => setOpen(false)}><small>05</small>Collaborate</a></div>
       </div>
     </header>
