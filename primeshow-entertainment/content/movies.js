@@ -94,7 +94,7 @@ export const movies = [
     year: "TBA",
     releaseDate: null,
     language: "Multilingual",
-    languages: ["Telugu", "Hindi"],
+    languages: ["Telugu", "Hindi", "Kannada"],
     genre: "Feature Film",
     duration: "TBA",
     status: "In Production",
