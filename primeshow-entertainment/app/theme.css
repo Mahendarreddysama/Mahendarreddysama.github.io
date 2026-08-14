@@ -9,33 +9,30 @@
 .mobile-theme-toggle{position:absolute;top:max(24px,env(safe-area-inset-top));left:max(24px,env(safe-area-inset-left));z-index:2;width:auto;min-width:132px;padding:0 15px;display:flex;gap:9px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em}
 .mobile-theme-toggle span{white-space:nowrap}
 
-/* Home uses a custom header, so expose the global toggle only there. */
-.home-global-theme-toggle{display:none;position:fixed;z-index:130;top:22px;right:24px}
-body:has(#home.hero) .home-global-theme-toggle{display:block}
-body:has(#home.hero) .home-global-theme-toggle .theme-toggle{box-shadow:0 8px 24px rgba(0,0,0,.28)}
-
 /* Light-mode state intentionally inherits the complete dark design.
    Add future white/light treatments only as explicit selector overrides here. */
 html[data-theme="light"]{color-scheme:dark}
+
+/* Header remains dark in every state, including future selective Light mode. */
+.site-header,html[data-theme="light"] .site-header{background:rgba(5,4,3,.82)!important;color:#f8f2e9!important;border-bottom-color:rgba(255,255,255,.08)!important;box-shadow:0 10px 32px rgba(0,0,0,.24)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.site-header .desktop-nav a,.site-header .menu-toggle,.site-header .theme-toggle,html[data-theme="light"] .site-header .desktop-nav a,html[data-theme="light"] .site-header .menu-toggle,html[data-theme="light"] .site-header .theme-toggle{color:#f8f2e9!important;text-shadow:none!important;filter:none!important}
+.site-header .theme-toggle,html[data-theme="light"] .site-header .theme-toggle{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.2)}
+.site-header .button-gold,html[data-theme="light"] .site-header .button-gold{color:#170803!important}
+.mobile-menu,html[data-theme="light"] .mobile-menu{background:linear-gradient(145deg,#1a0c08,#050403 65%)!important;color:#f8f2e9!important}
+.mobile-links a,.menu-close,.mobile-theme-toggle,html[data-theme="light"] .mobile-links a,html[data-theme="light"] .menu-close,html[data-theme="light"] .mobile-theme-toggle{color:#f8f2e9!important;border-color:rgba(255,255,255,.16)!important;text-shadow:none!important;filter:none!important}
 
 /* Footer is permanently dark in every state. */
 footer,html[data-theme="light"] footer{background:#050403!important;color:#f8f2e9!important;border-color:rgba(255,255,255,.1)!important}
 footer :is(p,a,span,small,strong),html[data-theme="light"] footer :is(p,a,span,small,strong){color:#c9c3bc!important;text-shadow:none!important}
 footer .brand-logo,html[data-theme="light"] footer .brand-logo{filter:drop-shadow(0 5px 18px rgba(0,0,0,.65)) drop-shadow(0 0 10px rgba(255,212,91,.16))}
 
-/* Keep header text crisp in both states. */
-.site-header .desktop-nav a,.site-header .menu-toggle,.mobile-links a,.menu-close{text-shadow:none!important;filter:none!important}
-
 /* Distribution image rail movement stays compositor-friendly. */
 .distribution-roll-row{will-change:transform;transition:transform .08s linear}
 
 @media(max-width:1000px){
   .nav-tools{display:none}
-  .home-global-theme-toggle{top:18px;right:76px}
 }
 @media(max-width:640px){
   .mobile-theme-toggle{top:max(18px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));min-width:124px;height:42px}
-  .home-global-theme-toggle{top:max(16px,env(safe-area-inset-top));right:72px}
-  .home-global-theme-toggle .theme-toggle{width:42px;height:42px}
 }
 @media(prefers-reduced-motion:reduce){.distribution-roll-row{transition:none}}
