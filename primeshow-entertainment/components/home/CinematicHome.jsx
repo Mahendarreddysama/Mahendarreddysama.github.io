@@ -3,9 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, ArrowRight, Boxes, Clapperboard, ExternalLink, Film, Globe2, Layers3, MapPin, Menu, Play, Sparkles, X } from "lucide-react";
 import ProcessImpact from "./ProcessImpact";
 import HomeContact from "./HomeContact";
@@ -13,19 +10,10 @@ import Brand from "@/components/layout/Brand";
 import RollingDistributionGallery from "@/components/services/RollingDistributionGallery";
 
 function MagneticButton({ href, className = "", icon = "right", children }) {
-  const ref = useRef(null);
-  const x = useSpring(0, { stiffness: 280, damping: 20 });
-  const y = useSpring(0, { stiffness: 280, damping: 20 });
-  const move = (event) => {
-    if (!ref.current) return;
-    const box = ref.current.getBoundingClientRect();
-    x.set((event.clientX - box.left - box.width / 2) * 0.16);
-    y.set((event.clientY - box.top - box.height / 2) * 0.16);
-  };
   return (
-    <motion.a ref={ref} style={{ x, y }} onMouseMove={move} onMouseLeave={() => { x.set(0); y.set(0); }} href={href} className={`button ${className}`}>
+    <a href={href} className={`button ${className}`}>
       <span>{children}</span>{icon === "down" ? <ArrowDown size={17} aria-hidden="true" /> : <ArrowRight size={16} aria-hidden="true" />}<i aria-hidden="true" />
-    </motion.a>
+    </a>
   );
 }
 
@@ -62,10 +50,10 @@ function Navigation({ items }) {
         <div className="nav-action"><MagneticButton href="#contact" className="button-gold">Collaborate</MagneticButton></div>
         <button className="menu-toggle" aria-label="Open navigation" aria-expanded={open} onClick={() => setOpen(true)}><Menu /></button>
       </nav>
-      <motion.div className="mobile-menu" initial={false} animate={{ clipPath: open ? "circle(150% at 88% 7%)" : "circle(0% at 88% 7%)", visibility: open ? "visible" : "hidden" }} transition={{ duration: .65, ease: [0.76, 0, 0.24, 1] }} aria-hidden={!open} inert={!open ? true : undefined}>
+      <div className="mobile-menu" style={{ clipPath: open ? "circle(150% at 88% 7%)" : "circle(0% at 88% 7%)", visibility: open ? "visible" : "hidden", transition: "clip-path .42s cubic-bezier(.76,0,.24,1)" }} aria-hidden={!open} inert={!open ? true : undefined}>
         <button className="menu-close" aria-label="Close navigation" onClick={() => setOpen(false)}><X /></button>
         <div className="mobile-links">{items.map((item, index) => <a key={item.label} href={item.href} onClick={() => setOpen(false)}><small>0{index + 1}</small>{item.label}</a>)}<a href="#contact" onClick={() => setOpen(false)}><small>05</small>Collaborate</a></div>
-      </motion.div>
+      </div>
     </header>
   );
 }
@@ -118,27 +106,15 @@ function MovieRail({ movies }) {
   };
   const move = (event) => { if (dragging.current) rail.current.scrollLeft = startScroll.current - (event.clientX - startX.current); };
   const up = () => { dragging.current = false; rail.current?.classList.remove("is-dragging"); };
-  useEffect(() => {
-    const element = rail.current;
-    const wheel = (event) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-      const canMove = event.deltaY > 0 ? element.scrollLeft < element.scrollWidth - element.clientWidth : element.scrollLeft > 0;
-      if (canMove) { event.preventDefault(); element.scrollLeft += event.deltaY; }
-    };
-    element.addEventListener("wheel", wheel, { passive: false });
-    return () => element.removeEventListener("wheel", wheel);
-  }, []);
   return <div ref={rail} className="movie-rail" aria-label="Featured productions" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}>{movies.map((movie) => <MovieCard key={movie.title} movie={movie} />)}</div>;
 }
 
 function HomeAboutCarousel({ content }) {
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
   const touchStart = useRef(null);
   const total = content.slides.length;
   const go = (next) => {
     const safe = (next + total) % total;
-    setDirection(next >= index ? 1 : -1);
     setIndex(safe);
   };
   const active = content.slides[index];
@@ -166,16 +142,10 @@ function HomeAboutCarousel({ content }) {
       }}
     >
       <div className="container about-carousel-shell">
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            className={`about-slide about-slide-${active.layout || "default"}`}
-            key={active.id}
-            custom={direction}
-            initial={{ opacity: 0, x: direction * 44 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction * -34 }}
-            transition={{ duration: .62, ease: [.22, 1, .36, 1] }}
-          >
+        <div
+          className={`about-slide about-slide-${active.layout || "default"}`}
+          key={active.id}
+        >
             <div className="about-slide-lead">
               <div className="about-heading">
                 <div className="eyebrow"><Sparkles size={14} /> {active.eyebrow}</div>
@@ -200,14 +170,13 @@ function HomeAboutCarousel({ content }) {
                 );
               })}
             </div>
-          </motion.div>
-        </AnimatePresence>
+        </div>
         <button type="button" className="about-next" onClick={() => go(index + 1)} aria-label={`Next: ${content.slides[(index + 1) % total].label}`}>
           <ArrowRight aria-hidden="true" />
           <span>{content.slides[(index + 1) % total].label}</span>
         </button>
         <div className="about-tabs" aria-label="About section pages">
-          {content.slides.map((slide, slideIndex) => <button key={slide.id} type="button" className={slideIndex === index ? "active" : ""} onClick={() => { setDirection(slideIndex > index ? 1 : -1); setIndex(slideIndex); }} aria-current={slideIndex === index ? "true" : undefined}>{slide.label}</button>)}
+          {content.slides.map((slide, slideIndex) => <button key={slide.id} type="button" className={slideIndex === index ? "active" : ""} onClick={() => setIndex(slideIndex)} aria-current={slideIndex === index ? "true" : undefined}>{slide.label}</button>)}
         </div>
       </div>
       <div className="story-a11y" aria-live="polite">{active.label}, page {index + 1} of {total}</div>
@@ -218,23 +187,6 @@ function HomeAboutCarousel({ content }) {
 export default function CinematicHome({ content }) {
   const root = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const reduceMotion = useReducedMotion();
-  const heroX = useMotionValue(0);
-  const heroY = useMotionValue(0);
-  const smoothX = useSpring(heroX, { stiffness: 30, damping: 20 });
-  const smoothY = useSpring(heroY, { stiffness: 30, damping: 20 });
-
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    gsap.registerPlugin(ScrollTrigger);
-    const context = gsap.context(() => {
-      if (!reduce) {
-        gsap.utils.toArray("[data-reveal]").forEach((element) => gsap.fromTo(element, { y: 48, opacity: 0 }, { y: 0, opacity: 1, duration: .9, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 86%" } }));
-      }
-    }, root);
-    return () => { context.revert(); };
-  }, []);
-
   useEffect(() => {
     if (content.hero.slides.length < 2) return;
     const timer = window.setInterval(() => {
@@ -243,44 +195,42 @@ export default function CinematicHome({ content }) {
     return () => window.clearInterval(timer);
   }, [content.hero.slides.length]);
 
-  const parallax = (event) => {
-    const x = (event.clientX / window.innerWidth - .5) * 18;
-    const y = (event.clientY / window.innerHeight - .5) * 12;
-    heroX.set(x); heroY.set(y);
-  };
-
   return (
     <div ref={root} className="site-wrap">
       <Navigation items={content.navigation} />
       <main id="main-content">
-        <section id="home" className="hero" onMouseMove={parallax} aria-roledescription="carousel" aria-label="PrimeShow cinematic stories">
+        <section id="home" className="hero" aria-roledescription="carousel" aria-label="PrimeShow cinematic stories">
           <div className="hero-slides" aria-live="off">
             {content.hero.slides.map((slide, index) => (
               <div
                 key={slide.image}
-                className={`hero-slide hero-slide-${index + 1} ${index === activeSlide ? "is-active" : ""} ${reduceMotion ? "reduce-motion" : ""}`}
+                className={`hero-slide hero-slide-${index + 1} ${index === activeSlide ? "is-active" : ""}`}
                 style={{ "--hero-position": slide.position, "--hero-mobile-position": slide.mobilePosition }}
                 aria-hidden={index !== activeSlide}
               >
-                <Image
-                  src={slide.image}
-                  alt={index === activeSlide ? slide.alt : ""}
-                  fill
-                  priority={index === 0}
-                  unoptimized
-                  sizes="100vw"
-                  className="hero-image"
-                />
+                <picture className="hero-picture" style={{ position: "absolute", inset: 0, display: "block", width: "100%", height: "100%" }}>
+                  <source media="(max-width: 640px)" srcSet={slide.image.replace("-optimized.webp", "-mobile.webp")} />
+                  <img
+                    src={slide.image}
+                    alt={index === activeSlide ? slide.alt : ""}
+                    width="1672"
+                    height="942"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    decoding="async"
+                    className="hero-image"
+                  />
+                </picture>
               </div>
             ))}
           </div>
           <div className="hero-overlay" /><div className="ambient-light" /><div className="grain" aria-hidden="true" />
-          <motion.div className="hero-content container" style={{ x: smoothX, y: smoothY }}>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .2 }} className="eyebrow"><Clapperboard size={15} /> {content.hero.eyebrow}</motion.div>
-            <h1>{content.hero.title.map((line, index) => <motion.span key={line} initial={{ opacity: 0, y: 70 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9, delay: .35 + index * .14, ease: [0.2, .8, .2, 1] }}>{line}</motion.span>)}</h1>
-            <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: .8 }}>{content.hero.body}</motion.p>
-            <motion.div className="hero-actions" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8, delay: 1 }}><MagneticButton href="#productions" className="button-gold" icon="down">Explore Our Flagship</MagneticButton><MagneticButton href="#contact" className="button-glass">Let&apos;s Create</MagneticButton></motion.div>
-          </motion.div>
+          <div className="hero-content container">
+            <div className="eyebrow"><Clapperboard size={15} /> {content.hero.eyebrow}</div>
+            <h1>{content.hero.title.map((line) => <span key={line}>{line}</span>)}</h1>
+            <p>{content.hero.body}</p>
+            <div className="hero-actions"><MagneticButton href="#productions" className="button-gold" icon="down">Explore Our Flagship</MagneticButton><MagneticButton href="#contact" className="button-glass">Let&apos;s Create</MagneticButton></div>
+          </div>
           <a className="scroll-cue" href="#impact" aria-label="Scroll to global impact"><span>Scroll to discover</span><ArrowDown size={16} /></a>
         </section>
 
