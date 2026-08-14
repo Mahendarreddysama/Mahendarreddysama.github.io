@@ -32,11 +32,8 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  colorScheme: "dark light",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#050403" },
-    { media: "(prefers-color-scheme: light)", color: "#f6f0e7" },
-  ],
+  colorScheme: "dark",
+  themeColor: "#050403",
 };
 
 const organizationSchema = {
@@ -46,7 +43,7 @@ const organizationSchema = {
 };
 const websiteSchema={"@context":"https://schema.org","@type":"WebSite",name:siteConfig.name,url:siteConfig.url,inLanguage:"en-IN"};
 
-const themeInit = `(function(){try{var t=localStorage.getItem('primeshow-theme');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+const themeInit = `(function(){try{var t=localStorage.getItem('primeshow-theme');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme='dark';}catch(e){document.documentElement.dataset.theme='dark';document.documentElement.style.colorScheme='dark';}})();`;
 
 export default function RootLayout({ children }) {
   return (
