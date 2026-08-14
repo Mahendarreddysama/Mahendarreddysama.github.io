@@ -25,11 +25,7 @@ footer :is(p,a,span,small,strong),html[data-theme="light"] footer :is(p,a,span,s
 footer .brand-logo,html[data-theme="light"] footer .brand-logo{filter:drop-shadow(0 5px 18px rgba(0,0,0,.65)) drop-shadow(0 0 10px rgba(255,212,91,.16))}
 
 /* Home / Light state — About */
-html[data-theme="light"] #about.about{
-  background:#fff!important;
-  background-image:none!important;
-  color:#111!important;
-}
+html[data-theme="light"] #about.about{background:#fff!important;background-image:none!important;color:#111!important}
 html[data-theme="light"] #about.about:before{background:#fff!important}
 html[data-theme="light"] #about.about :is(.about-slide-lead h2,.about-slide-lead>p,.about-feature-copy h3,.about-feature-copy p,.about-feature-copy>span,.strength-index,.eyebrow,.story-a11y){color:#111!important;text-shadow:none!important;-webkit-text-fill-color:#111!important}
 html[data-theme="light"] #about.about :is(h1,h2,h3) em{color:#111!important;background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;-webkit-text-fill-color:#111!important}
@@ -43,68 +39,106 @@ html[data-theme="light"] #about.about .about-next span{color:#111!important}
 html[data-theme="light"] #about.about .strength-icon{color:#111!important;filter:none!important}
 
 /* Home / Light state — Productions */
-html[data-theme="light"] #productions.productions{
-  background:#fff!important;
-  background-image:none!important;
-  color:#111!important;
-}
-html[data-theme="light"] #productions.productions .section-head :is(h2,p,.eyebrow),
-html[data-theme="light"] #productions.productions .movie-meta :is(h3,p),
-html[data-theme="light"] #productions.productions .button-line{
-  color:#111!important;
-  text-shadow:none!important;
-}
+html[data-theme="light"] #productions.productions{background:#fff!important;background-image:none!important;color:#111!important}
+html[data-theme="light"] #productions.productions .section-head :is(h2,p,.eyebrow),html[data-theme="light"] #productions.productions .movie-meta :is(h3,p),html[data-theme="light"] #productions.productions .button-line{color:#111!important;text-shadow:none!important}
 html[data-theme="light"] #productions.productions h2 em{color:#111!important;background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;-webkit-text-fill-color:#111!important}
 html[data-theme="light"] #productions.productions .movie-meta p span{background:#111!important}
 html[data-theme="light"] #productions.productions .button-line{border-bottom-color:rgba(0,0,0,.45)!important}
 html[data-theme="light"] #productions.productions .movie-art :is(.status,.movie-overlay,.movie-overlay span){color:#f8f2e9!important}
 
 /* Home / Light state — Our Process */
-html[data-theme="light"] #process.process-section{
-  background:#fff!important;
-  background-image:none!important;
-  color:#111!important;
-}
+html[data-theme="light"] #process.process-section{background:#fff!important;background-image:none!important;color:#111!important}
 html[data-theme="light"] #process.process-section :is(.process-intro h2,.process-intro>p,.process-intro .eyebrow,.process-copy span,.process-copy h3,.process-copy p){color:#111!important;text-shadow:none!important;-webkit-text-fill-color:#111!important}
 html[data-theme="light"] #process.process-section h2 em{color:#111!important;background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;-webkit-text-fill-color:#111!important}
 html[data-theme="light"] #process.process-section .process-line{background:rgba(0,0,0,.15)!important}
 html[data-theme="light"] #process.process-section .process-node{box-shadow:0 0 0 8px #fff!important}
 
 /* About Us page / Light state — Chapter 01 and Chapter 04 only */
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04){
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04){background:#fff!important;background-image:none!important;color:#111!important}
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-bg,html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-shade,html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) > .grain{display:none!important}
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-copy :is(.eyebrow,h1,h2,p,blockquote),html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .leader-info :is(span,h3,h4,p),html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .strength-card :is(h3,p){color:#111!important;text-shadow:none!important;-webkit-text-fill-color:#111!important}
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .strength-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.12)!important;box-shadow:0 12px 34px rgba(0,0,0,.06)!important}
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .strength-card svg{color:#111!important}
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .leader-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.12)!important}
+html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-media figcaption :is(span,p){color:#f8f2e9!important}
+
+/* Features landing / Light state — page background white, image cards retain their original overlays/colors. */
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) main,
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro,
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .service-card-stage{
+  background:#fff!important;
+  background-image:none!important;
+}
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro:before{background:linear-gradient(90deg,transparent 49.8%,rgba(0,0,0,.07) 50%,transparent 50.2%)!important}
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro :is(h1,p){color:#111!important;text-shadow:none!important}
+/* Preserve gold/highlight accent text and icons. */
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro :is(.eyebrow,h1 em,.services-down){color:var(--gold)!important}
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .service-portal :is(.portal-number,.portal-copy small,.portal-copy h2,.portal-copy p,.portal-link){color:inherit}
+
+/* Production page / Light state — requested white sections only. */
+html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section,.services-next){
   background:#fff!important;
   background-image:none!important;
   color:#111!important;
 }
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-bg,
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-shade,
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) > .grain{
-  display:none!important;
-}
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-copy :is(.eyebrow,h1,h2,p,blockquote),
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .leader-info :is(span,h3,h4,p),
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .strength-card :is(h3,p){
+html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section,.services-next) .section-head h2,
+html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section) .section-head>p,
+html[data-theme="light"] .services-theme:has(.division-production) .services-next h2,
+html[data-theme="light"] .services-theme:has(.division-production) .catalog-meta h3,
+html[data-theme="light"] .services-theme:has(.division-production) .trailer-card>div:last-child h3,
+html[data-theme="light"] .services-theme:has(.division-production) .catalog-search input,
+html[data-theme="light"] .services-theme:has(.division-production) .services-next .button-line{
   color:#111!important;
   text-shadow:none!important;
-  -webkit-text-fill-color:#111!important;
 }
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .strength-card{
-  background:#f7f7f7!important;
-  border-color:rgba(0,0,0,.12)!important;
-  box-shadow:0 12px 34px rgba(0,0,0,.06)!important;
+html[data-theme="light"] .services-theme:has(.division-production) .capability-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.11)!important;box-shadow:0 14px 36px rgba(0,0,0,.05)}
+html[data-theme="light"] .services-theme:has(.division-production) .capability-card h3{color:#111!important}
+html[data-theme="light"] .services-theme:has(.division-production) .catalog-search{background:#f7f7f7!important;border-color:rgba(0,0,0,.14)!important}
+html[data-theme="light"] .services-theme:has(.division-production) .filter-chips button:not(.active){border-color:rgba(0,0,0,.14)!important;color:#555!important}
+html[data-theme="light"] .services-theme:has(.division-production) .catalog-card .catalog-meta p,
+html[data-theme="light"] .services-theme:has(.division-production) .catalog-card .catalog-meta small,
+html[data-theme="light"] .services-theme:has(.division-production) .trailer-card>div:last-child p{color:#555!important}
+html[data-theme="light"] .services-theme:has(.division-production) .services-next .button-line{border-bottom-color:rgba(0,0,0,.45)!important}
+/* Preserve existing orange/gold accents and poster/video overlays. */
+html[data-theme="light"] .services-theme:has(.division-production) :is(.eyebrow,.section-head h2 em,.services-next h2 em,.capability-card svg){color:var(--gold)!important}
+html[data-theme="light"] .services-theme:has(.division-production) :is(.catalog-art,.trailer-art) :is(.status,.catalog-hover,.catalog-hover p,.catalog-hover small,.trailer-play){color:#f8f2e9!important}
+
+/* Distribution page / Light state — requested white sections only. */
+html[data-theme="light"] .services-theme:has(.division-distribution) :is(.service-overview,.distribution-roll,.distribution-library,.services-next),
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-stage{
+  background:#fff!important;
+  background-image:none!important;
+  color:#111!important;
 }
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .strength-card svg{color:#111!important}
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .leader-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.12)!important}
-/* Captions stay light because they sit directly over images. */
-html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-media figcaption :is(span,p){color:#f8f2e9!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-rows:after{background:linear-gradient(90deg,#fff 0,transparent 8%,transparent 92%,#fff 100%)!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .service-overview .section-head h2,
+html[data-theme="light"] .services-theme:has(.division-distribution) .service-overview .section-head>p,
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-title h2,
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-title p,
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-library .section-head h2,
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-library .section-head>p,
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-title-row h3,
+html[data-theme="light"] .services-theme:has(.division-distribution) .catalog-search input,
+html[data-theme="light"] .services-theme:has(.division-distribution) .services-next h2,
+html[data-theme="light"] .services-theme:has(.division-distribution) .services-next .button-line{
+  color:#111!important;
+  text-shadow:none!important;
+}
+html[data-theme="light"] .services-theme:has(.division-distribution) .capability-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.11)!important;box-shadow:0 14px 36px rgba(0,0,0,.05)}
+html[data-theme="light"] .services-theme:has(.division-distribution) .capability-card h3{color:#111!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .catalog-search{background:#f7f7f7!important;border-color:rgba(0,0,0,.14)!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .filter-chips button:not(.active){border-color:rgba(0,0,0,.14)!important;color:#555!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-title-row{border-color:rgba(0,0,0,.12)!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-title-row :is(p,small){color:#555!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) :is(.catalog-note,.empty-catalog){color:#555!important;border-color:rgba(0,0,0,.12)!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .services-next .button-line{border-bottom-color:rgba(0,0,0,.45)!important}
+/* Preserve existing orange/gold accents; frame labels stay light because they sit over release images. */
+html[data-theme="light"] .services-theme:has(.division-distribution) :is(.eyebrow,.section-head h2 em,.distribution-roll-title h2 em,.services-next h2 em,.capability-card svg){color:var(--gold)!important}
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-frame span{color:#f8f2e9!important}
 
 /* Distribution image rail movement stays compositor-friendly. */
 .distribution-roll-row{will-change:transform;transition:transform .08s linear}
 
-@media(max-width:1000px){
-  .nav-tools{display:none}
-}
-@media(max-width:640px){
-  .mobile-theme-toggle{top:max(18px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));min-width:124px;height:42px}
-}
+@media(max-width:1000px){.nav-tools{display:none}}
+@media(max-width:640px){.mobile-theme-toggle{top:max(18px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));min-width:124px;height:42px}}
 @media(prefers-reduced-motion:reduce){.distribution-roll-row{transition:none}}
