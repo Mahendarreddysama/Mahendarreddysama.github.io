@@ -1,0 +1,73 @@
+/* PrimeShow persistent Dark / Light theme layer */
+
+.nav-tools{justify-self:end;display:flex;align-items:center;gap:12px}
+.theme-toggle{display:grid;place-items:center;width:44px;height:44px;padding:0;color:#f8f2e9;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(5,4,3,.32);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;transition:transform .25s ease,background .25s ease,border-color .25s ease,color .25s ease}
+.theme-toggle:hover,.theme-toggle:focus-visible{transform:scale(1.05);border-color:rgba(240,154,34,.7);background:rgba(240,154,34,.14)}
+.theme-toggle svg{width:19px;height:19px}
+.mobile-theme-toggle{position:absolute;top:max(24px,env(safe-area-inset-top));left:max(24px,env(safe-area-inset-left));z-index:2;width:auto;min-width:132px;padding:0 15px;display:flex;gap:9px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em}
+.mobile-theme-toggle span{white-space:nowrap}
+
+html[data-theme="light"]{
+  color-scheme:light;
+  --color-obsidian:#f6f0e7;
+  --color-charcoal:#eee5d9;
+  --color-slate:#e6dbcd;
+  --color-white:#1d1713;
+  --color-gray:#6f655d;
+  --obsidian:#f6f0e7;
+  --charcoal:#eee5d9;
+  --slate:#e6dbcd;
+  --white:#1d1713;
+  --gray:#6f655d;
+  --surface-gradient:radial-gradient(circle at 68% 24%,rgba(240,154,34,.12),transparent 36%),linear-gradient(135deg,#fffaf3 0%,#f6f0e7 62%);
+  background:#f6f0e7;
+}
+html[data-theme="light"] body{background:#f6f0e7;color:#1d1713}
+html[data-theme="light"] .site-wrap{background:#f6f0e7}
+
+/* Keep cinematic image-led heroes dark for contrast in both themes. */
+html[data-theme="light"] :is(.hero,.hub-hero,.division-hero,.movie-detail-hero,.article-hero,.services-intro,.hub-cta){color:#f8f2e9}
+html[data-theme="light"] :is(.hero,.hub-hero,.division-hero,.movie-detail-hero,.article-hero,.services-intro,.hub-cta) :is(h1,h2,h3,p,a,span,small,strong){color:inherit}
+
+/* Main light surfaces */
+html[data-theme="light"] :is(.about,.productions,.stats-section,.catalog-feature,.distribution-library,.trailer-section,.service-card-stage,.service-overview,.exhibition-flow,.theatre-gallery,.exhibition-stats,.services-next,.movie-detail,.movie-story,.credits,.detail-gallery,.related-films,.hub-theme,.hub-nav-stage,.hub-section,.continue-exploring,.article-detail,.article-body,.contact-section,.process-section,.market-impact,.home-distribution-wrap,.distribution-roll,.distribution-roll-stage){background-color:#f6f0e7!important;background-image:none!important}
+html[data-theme="light"] :is(.credits,.related-films,.trailer-section,.theatre-gallery,.hub-nav-stage){background-color:#eee5d9!important}
+
+html[data-theme="light"] main :is(.section-head>p,.about-copy p,.movie-story p,.movie-story dd,.catalog-meta p,.catalog-meta>small,.trailer-card p,.capability-card p,.distribution-roll-title p,.catalog-note,.article-copy p,.section-head p,.upcoming-card p,.award-timeline p,.continue-exploring span,.article-body p,.article-byline,.workflow-timeline p){color:#6f655d}
+html[data-theme="light"] main :is(h1,h2,h3,strong,dt,dd){text-shadow:none}
+
+/* Cards and controls */
+html[data-theme="light"] :is(.stat-card,.capability-card,.catalog-card,.trailer-card,.related-row a,.article-card,.quiz-card,.upcoming-card,.award-timeline article,.continue-grid a,.process-card,.contact-card,.impact-metric,.distribution-title-row){border-color:rgba(52,38,28,.14)!important;background-color:rgba(255,255,255,.58)!important;box-shadow:0 18px 50px rgba(74,54,38,.08)}
+html[data-theme="light"] :is(.catalog-search,.hub-search,.filter-chips button){color:#2a211b;border-color:rgba(52,38,28,.18);background:rgba(255,255,255,.64)}
+html[data-theme="light"] :is(.catalog-search input,.hub-search input){color:#231b17}
+html[data-theme="light"] :is(.catalog-search input,.hub-search input)::placeholder{color:#81766e}
+html[data-theme="light"] .filter-chips button{color:#6a5e56}
+html[data-theme="light"] .filter-chips button.active{color:#17110d;background:var(--gold)}
+
+/* Text-only distribution catalogue */
+html[data-theme="light"] .distribution-title-row{border-color:rgba(52,38,28,.12)!important}
+html[data-theme="light"] .distribution-title-row h3{color:#211915}
+html[data-theme="light"] .distribution-title-row p,html[data-theme="light"] .distribution-title-row small{color:#756a62}
+
+/* Footer */
+html[data-theme="light"] footer{background:#e9dfd2;color:#211915;border-color:rgba(52,38,28,.12)}
+html[data-theme="light"] footer :is(p,a,span,small){color:#5f554e}
+
+/* Transparent header remains cinematic and readable over either theme. */
+html[data-theme="light"] .desktop-nav a,html[data-theme="light"] .menu-toggle{color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.75)}
+html[data-theme="light"] .site-header.is-scrolled .desktop-nav a,html[data-theme="light"] .site-header.is-scrolled .menu-toggle{color:#211915;text-shadow:0 1px 8px rgba(255,255,255,.75)}
+html[data-theme="light"] .site-header.is-scrolled .theme-toggle{color:#211915;border-color:rgba(33,25,21,.2);background:rgba(255,250,244,.72)}
+html[data-theme="light"] .mobile-menu{background:linear-gradient(145deg,#fff8ef,#eee5d9 65%)!important;color:#211915}
+html[data-theme="light"] .mobile-links a,html[data-theme="light"] .menu-close{color:#211915;border-color:rgba(52,38,28,.16)}
+html[data-theme="light"] .mobile-theme-toggle{color:#211915;border-color:rgba(52,38,28,.2);background:rgba(255,255,255,.62)}
+
+/* Image rail movement is transform-driven; keep it compositor-friendly. */
+.distribution-roll-row{will-change:transform;transition:transform .08s linear}
+
+@media(max-width:1000px){
+  .nav-tools{display:none}
+}
+@media(max-width:640px){
+  .mobile-theme-toggle{top:max(18px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));min-width:124px;height:42px}
+}
+@media(prefers-reduced-motion:reduce){.distribution-roll-row{transition:none}}
