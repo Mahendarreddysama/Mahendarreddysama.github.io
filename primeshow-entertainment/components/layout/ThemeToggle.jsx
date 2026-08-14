@@ -14,7 +14,7 @@ export default function ThemeToggle({ mobile = false }) {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
     document.documentElement.dataset.theme = next;
-    document.documentElement.style.colorScheme = next;
+    document.documentElement.style.colorScheme = "dark";
     try { localStorage.setItem("primeshow-theme", next); } catch {}
   };
 
