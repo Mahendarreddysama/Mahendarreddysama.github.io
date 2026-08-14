@@ -1,1 +1,0 @@
-export default function manifest(){return{name:"PrimeShow Entertainment",short_name:"PrimeShow",description:"Indian storytelling. Global cinematic scale.",start_url:"/",display:"standalone",background_color:"#050403",theme_color:"#050403",icons:[{src:"/favicon.svg",sizes:"any",type:"image/svg+xml"}]}}

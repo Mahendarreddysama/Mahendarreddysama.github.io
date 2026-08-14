@@ -1,1 +1,0 @@
-export default function LoadingPage(){return <main id="main-content" className="route-status" aria-live="polite"><div className="route-status-mark" aria-hidden="true">P</div><p>Preparing the next story…</p></main>}
