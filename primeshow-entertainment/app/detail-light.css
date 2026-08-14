@@ -1,0 +1,114 @@
+/* Selective Light-mode treatment for movie detail and Primeverse article detail pages.
+   Dark mode is untouched. Gold/orange accents and text over imagery stay unchanged. */
+
+/* Movie detail pages — HanuMan, SYG and BRB */
+html[data-theme="light"] .movie-detail{
+  background:#fff!important;
+}
+
+html[data-theme="light"] .movie-detail :is(.movie-story,.credits,.detail-gallery,.related-films){
+  background:#fff!important;
+  background-image:none!important;
+  color:#111!important;
+}
+
+html[data-theme="light"] .movie-detail .movie-story h2,
+html[data-theme="light"] .movie-detail .credits h3,
+html[data-theme="light"] .movie-detail .related-films h2,
+html[data-theme="light"] .movie-detail .related-row h3{
+  color:#111!important;
+  text-shadow:none!important;
+}
+
+html[data-theme="light"] .movie-detail .movie-story p,
+html[data-theme="light"] .movie-detail .movie-story dd,
+html[data-theme="light"] .movie-detail .related-row p{
+  color:#555!important;
+}
+
+html[data-theme="light"] .movie-detail .movie-story dl{
+  border-top-color:rgba(0,0,0,.12)!important;
+}
+
+html[data-theme="light"] .movie-detail .movie-story dl>div,
+html[data-theme="light"] .movie-detail .credits h3{
+  border-bottom-color:rgba(0,0,0,.12)!important;
+}
+
+html[data-theme="light"] .movie-detail .related-row a{
+  background:rgba(0,0,0,.025)!important;
+  border-color:rgba(0,0,0,.11)!important;
+}
+
+html[data-theme="light"] .movie-detail .related-row a:hover{
+  border-color:rgba(240,154,34,.45)!important;
+}
+
+/* Preserve established accent colors on white sections. */
+html[data-theme="light"] .movie-detail :is(.movie-story,.credits,.detail-gallery,.related-films) .eyebrow,
+html[data-theme="light"] .movie-detail .movie-story dt,
+html[data-theme="light"] .movie-detail .related-row span,
+html[data-theme="light"] .movie-detail .related-row svg{
+  color:var(--gold)!important;
+}
+
+/* The movie hero stays cinematic/dark over its image. */
+html[data-theme="light"] .movie-detail .movie-detail-hero,
+html[data-theme="light"] .movie-detail .movie-detail-hero :is(h1,p,.back-link){
+  color:#f8f2e9!important;
+}
+
+/* Primeverse Read the Craft / article detail pages */
+html[data-theme="light"] .article-detail{
+  background:#fff!important;
+  color:#111!important;
+}
+
+html[data-theme="light"] .article-detail .article-body,
+html[data-theme="light"] .article-detail .continue-exploring{
+  background:#fff!important;
+  background-image:none!important;
+  color:#111!important;
+}
+
+html[data-theme="light"] .article-detail .article-body h2,
+html[data-theme="light"] .article-detail .continue-exploring h2,
+html[data-theme="light"] .article-detail .continue-grid strong{
+  color:#111!important;
+  text-shadow:none!important;
+}
+
+html[data-theme="light"] .article-detail .article-body p{
+  color:#444!important;
+}
+
+html[data-theme="light"] .article-detail .article-body aside a,
+html[data-theme="light"] .article-detail .continue-grid a>span{
+  color:#555!important;
+}
+
+html[data-theme="light"] .article-detail .continue-grid a{
+  background:rgba(0,0,0,.025)!important;
+  border-color:rgba(0,0,0,.11)!important;
+}
+
+html[data-theme="light"] .article-detail .continue-grid a:hover{
+  border-color:rgba(240,154,34,.48)!important;
+}
+
+/* Keep the existing PrimeShow accent palette. */
+html[data-theme="light"] .article-detail .article-body aside>span,
+html[data-theme="light"] .article-detail .article-body aside button,
+html[data-theme="light"] .article-detail .article-body section>span,
+html[data-theme="light"] .article-detail .article-body blockquote,
+html[data-theme="light"] .article-detail .continue-exploring .eyebrow,
+html[data-theme="light"] .article-detail .continue-exploring h2 em,
+html[data-theme="light"] .article-detail .continue-grid a>svg:last-child{
+  color:var(--gold)!important;
+}
+
+/* The article hero remains image-led and dark for readability. */
+html[data-theme="light"] .article-detail .article-hero,
+html[data-theme="light"] .article-detail .article-hero :is(h1,p,.back-link,.article-byline span){
+  color:#f8f2e9!important;
+}
