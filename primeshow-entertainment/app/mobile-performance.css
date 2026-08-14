@@ -48,6 +48,38 @@
     flex-wrap:wrap;
   }
 
+  /* Movie detail heroes */
+  .movie-detail-hero {
+    height:76svh !important;
+    min-height:560px !important;
+    max-height:760px;
+  }
+  .movie-detail-hero > img {
+    object-fit:cover !important;
+    object-position:var(--movie-hero-mobile,var(--movie-hero-desktop,center center)) !important;
+    transform:none !important;
+    animation:none !important;
+  }
+  .movie-detail-shade {
+    background:linear-gradient(180deg,rgba(5,4,3,.34),rgba(5,4,3,.08) 35%,rgba(5,4,3,.9)),linear-gradient(90deg,rgba(5,4,3,.72),rgba(5,4,3,.18) 70%,transparent) !important;
+  }
+  .movie-detail-copy {
+    justify-content:flex-end !important;
+    padding-top:calc(var(--header-h) + 24px);
+    padding-bottom:54px;
+  }
+  .movie-detail-copy .back-link { margin-bottom:24px; }
+  .movie-detail-copy h1 {
+    max-width:92vw;
+    font-size:clamp(3.2rem,15vw,5.2rem) !important;
+    line-height:.88 !important;
+  }
+  .movie-detail-copy > p {
+    max-width:90vw;
+    line-height:1.55;
+    letter-spacing:.08em;
+  }
+
   /* Primeverse hero */
   .hub-hero {
     min-height:100svh;
@@ -84,16 +116,29 @@
     overflow-wrap:anywhere;
     word-break:normal;
   }
-  .hub-hero-copy h1 em {
-    display:inline;
-  }
+  .hub-hero-copy h1 em { display:inline; }
   .hub-hero-copy p {
     max-width:88vw;
     margin-top:18px;
     line-height:1.5;
   }
-  .hub-hero .scroll-cue {
-    bottom:16px;
+  .hub-hero .scroll-cue { bottom:16px; }
+
+  /* Primeverse article image framing */
+  .article-detail-building-the-world-of-hanuman .article-hero > img {
+    object-fit:cover !important;
+    object-position:46% center !important;
+  }
+  .article-detail-building-the-world-of-hanuman .article-hero {
+    min-height:78svh !important;
+  }
+  .article-card.article-1 .article-image img {
+    object-fit:cover !important;
+    object-position:46% center !important;
+  }
+  .article-card.article-1 .article-image {
+    min-height:0 !important;
+    aspect-ratio:16 / 10;
   }
 
   /* Primeverse content */
@@ -142,19 +187,13 @@
     grid-template-columns:1fr !important;
     gap:14px !important;
   }
-  .hub-masonry > * {
-    min-height:280px !important;
-  }
+  .hub-masonry > * { min-height:280px !important; }
   .award-timeline article {
     grid-template-columns:auto 1fr !important;
     gap:14px !important;
   }
-  .award-timeline .award-year {
-    grid-column:1 / -1;
-  }
-  .continue-exploring h2 {
-    font-size:clamp(2.5rem,12vw,4.5rem);
-  }
+  .award-timeline .award-year { grid-column:1 / -1; }
+  .continue-exploring h2 { font-size:clamp(2.5rem,12vw,4.5rem); }
   .hub-lightbox {
     grid-template-columns:44px minmax(0,1fr) 44px !important;
     padding:14px !important;
@@ -162,18 +201,14 @@
   .hub-lightbox figure { min-width:0; width:100%; }
 
   /* Global mobile performance */
-  .ambient-light,.grain,.section-light-sweep,.global-cursor {
-    display:none !important;
-  }
+  .ambient-light,.grain,.section-light-sweep,.global-cursor { display:none !important; }
   .site-header.is-scrolled {
     backdrop-filter:none;
     -webkit-backdrop-filter:none;
     background:rgba(5,4,3,.94);
   }
   .scroll-cue { animation:none; }
-  .motion-tilt,.button,.stat-card,.service-portal,.catalog-card,.movie-card {
-    transition:none !important;
-  }
+  .motion-tilt,.button,.stat-card,.service-portal,.catalog-card,.movie-card { transition:none !important; }
   .stat-card:hover,.stat-card:focus-visible,.button-gold:hover { transform:none; }
   img { content-visibility:auto; }
   .about-feature-card,.capability-card,.catalog-card,.trailer-card,.distribution-title-row,.cinema-frame,
@@ -195,6 +230,13 @@
   .button { min-height:46px; padding-inline:18px; }
   .brand { width:132px; }
 
+  .movie-detail-hero {
+    height:72svh !important;
+    min-height:520px !important;
+  }
+  .movie-detail-copy { padding-bottom:40px; }
+  .movie-detail-copy h1 { font-size:clamp(2.9rem,14vw,4.4rem) !important; }
+
   .hub-hero-copy {
     padding-top:108px;
     padding-bottom:104px;
@@ -203,14 +245,17 @@
     font-size:clamp(2.6rem,15.2vw,4rem) !important;
     line-height:.9 !important;
   }
-  .hub-hero-copy .hero-actions {
-    width:100%;
-  }
+  .hub-hero-copy .hero-actions { width:100%; }
   .hub-hero-copy .hero-actions .button {
     flex:1 1 100%;
     width:100%;
   }
-  .article-image,.quiz-poster,.upcoming-art,.hub-masonry > * {
-    min-height:240px !important;
+  .article-image,.quiz-poster,.upcoming-art,.hub-masonry > * { min-height:240px !important; }
+  .article-card.article-1 .article-image {
+    min-height:0 !important;
+    aspect-ratio:16 / 10;
+  }
+  .article-detail-building-the-world-of-hanuman .article-hero {
+    min-height:72svh !important;
   }
 }
