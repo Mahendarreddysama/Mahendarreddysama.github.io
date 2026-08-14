@@ -24,7 +24,8 @@ function Chapter({ chapter, strengths, index }) {
 }
 
 function ChapterMedia({ chapter }) {
-  return <figure className="chapter-media"><Image src={chapter.image} alt={chapter.imageAlt} fill priority={chapter.number === "01"} sizes="(max-width: 900px) 100vw, 52vw" /><figcaption><span>{chapter.number}</span><p>{chapter.eyebrow}</p></figcaption></figure>;
+  const showImageNumber = chapter.number !== "01" && chapter.number !== "03";
+  return <figure className="chapter-media"><Image src={chapter.image} alt={chapter.imageAlt} fill priority={chapter.number === "01"} sizes="(max-width: 900px) 100vw, 52vw" /><figcaption>{showImageNumber && <span>{chapter.number}</span>}<p>{chapter.eyebrow}</p></figcaption></figure>;
 }
 
 export default function AboutExperience({ content }) {
