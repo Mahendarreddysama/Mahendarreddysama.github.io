@@ -2,6 +2,7 @@ import CinematicMotion from "../components/motion/CinematicMotion";
 import Analytics from "../components/Analytics";
 import JsonLd from "../components/JsonLd";
 import WhatsAppFloatingButton from "../components/WhatsAppFloatingButton";
+import ThemeToggle from "../components/layout/ThemeToggle";
 import { absoluteUrl,publicSocialProfiles,siteConfig } from "@/content/site";
 import "./globals.css";
 import "./mobile-performance.css";
@@ -32,7 +33,10 @@ export const viewport = {
   initialScale: 1,
   viewportFit: "cover",
   colorScheme: "dark light",
-  themeColor: "#050403",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#050403" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f0e7" },
+  ],
 };
 
 const organizationSchema = {
@@ -41,14 +45,16 @@ const organizationSchema = {
   name:siteConfig.name,url:siteConfig.url,logo:absoluteUrl("/images/primeshow-logo.png"),description:siteConfig.description,address:{"@type":"PostalAddress",streetAddress:"Plot No. 5, Ganesh Nagar Colony, Kuntloor, Hayathnagar",addressLocality:"Hyderabad",addressRegion:"Telangana",postalCode:"501505",addressCountry:"IN"},sameAs:publicSocialProfiles,
 };
 const websiteSchema={"@context":"https://schema.org","@type":"WebSite",name:siteConfig.name,url:siteConfig.url,inLanguage:"en-IN"};
-const themeInit=`(function(){try{var saved=localStorage.getItem('primeshow-theme');var theme=saved==='light'||saved==='dark'?saved:'dark';document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+
+const themeInit = `(function(){try{var t=localStorage.getItem('primeshow-theme');if(t!=='light'&&t!=='dark')t='dark';document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{__html:themeInit}} /></head>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
+        <div className="home-global-theme-toggle"><ThemeToggle /></div>
         <CinematicMotion>{children}</CinematicMotion>
         <JsonLd data={[organizationSchema,websiteSchema]}/>
         <Analytics/>
