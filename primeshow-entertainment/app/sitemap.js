@@ -1,0 +1,4 @@
+import { articles,quizzes } from "@/content/hub";
+import { movies } from "@/content/movies";
+import { absoluteUrl } from "@/content/site";
+export default function sitemap(){const staticPaths=["/","/about","/services","/services/production","/services/distribution","/services/exhibition","/prime-hub","/contact"];return[...staticPaths.map(path=>({url:absoluteUrl(path),changeFrequency:path==="/"?"weekly":"monthly",priority:path==="/"?1:.8})),...movies.filter(movie=>movie.hasDetailPage!==false).map(movie=>({url:absoluteUrl(`/movies/${movie.slug}`),lastModified:movie.releaseDate||undefined,changeFrequency:"monthly",priority:.8})),...articles.map(article=>({url:absoluteUrl(`/prime-hub/articles/${article.slug}`),lastModified:article.publishedAt,changeFrequency:"monthly",priority:.7})),...quizzes.map(quiz=>({url:absoluteUrl(`/prime-hub/quizzes/${quiz.slug}`),changeFrequency:"monthly",priority:.5}))]}

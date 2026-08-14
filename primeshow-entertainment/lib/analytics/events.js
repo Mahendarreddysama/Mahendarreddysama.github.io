@@ -1,0 +1,2 @@
+export const ANALYTICS_EVENTS = Object.freeze({ CONTACT_SUBMIT: "contact_submit", CTA_CLICK: "cta_click", QUIZ_COMPLETE: "quiz_complete", SCROLL_DEPTH: "scroll_depth", VIDEO_INTERACTION: "video_interaction", WHATSAPP_CLICK: "whatsapp_click" });
+export function emitAnalytics(name, parameters = {}) { if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("prime-analytics", { detail: { name, ...parameters } })); }
