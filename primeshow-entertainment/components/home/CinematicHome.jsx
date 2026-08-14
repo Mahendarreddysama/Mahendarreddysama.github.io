@@ -119,62 +119,37 @@ function HomeAboutCarousel({ content }) {
   };
   const active = content.slides[index];
   const strengthIcons = [ExternalLink, Layers3, Globe2, Film, Boxes, MapPin];
-
   const featureClass = `about-feature-grid about-feature-${active.layout || "default"}`;
 
   return (
-    <section
-      id="about"
-      className="about about-carousel section"
-      aria-roledescription="carousel"
-      aria-label="Discover PrimeShow"
-      tabIndex="0"
-      onKeyDown={(event) => {
-        if (event.key === "ArrowRight") go(index + 1);
-        if (event.key === "ArrowLeft") go(index - 1);
-      }}
+    <section id="about" className="about about-carousel section" aria-roledescription="carousel" aria-label="Discover PrimeShow" tabIndex="0"
+      onKeyDown={(event) => { if (event.key === "ArrowRight") go(index + 1); if (event.key === "ArrowLeft") go(index - 1); }}
       onTouchStart={(event) => { touchStart.current = event.changedTouches[0].clientX; }}
       onTouchEnd={(event) => {
         if (touchStart.current == null) return;
         const distance = touchStart.current - event.changedTouches[0].clientX;
         if (Math.abs(distance) > 48) go(index + (distance > 0 ? 1 : -1));
         touchStart.current = null;
-      }}
-    >
+      }}>
       <div className="container about-carousel-shell">
-        <div
-          className={`about-slide about-slide-${active.layout || "default"}`}
-          key={active.id}
-        >
-            <div className="about-slide-lead">
-              <div className="about-heading">
-                <div className="eyebrow"><Sparkles size={14} /> {active.eyebrow}</div>
-                <h2>{active.title}</h2>
-              </div>
-              <p>{active.body}</p>
-            </div>
-            <div className={featureClass}>
-              {active.features.map((feature, featureIndex) => {
-                const StrengthIcon = strengthIcons[featureIndex];
-                return (
-                <article className={`about-feature-card ${feature.image ? "has-image" : ""}`} key={feature.title}>
-                  {feature.image && <div className="about-feature-image"><Image src={feature.image} alt={feature.imageAlt} fill sizes="(max-width: 640px) 46vw, 34vw" unoptimized={active.layout === "leadership"} /></div>}
-                  {feature.initials && <div className="leader-initials" aria-hidden="true">{feature.initials}</div>}
-                  {active.layout === "strengths" && <><div className="strength-index" aria-hidden="true">{feature.number}</div><StrengthIcon className="strength-icon" aria-hidden="true" strokeWidth={1.8} /></>}
-                  <div className="about-feature-copy">
-                    <span>{feature.number}</span>
-                    <h3>{feature.title}</h3>
-                    <p>{feature.text}</p>
-                  </div>
-                </article>
-                );
-              })}
-            </div>
+        <div className={`about-slide about-slide-${active.layout || "default"}`} key={active.id}>
+          <div className="about-slide-lead">
+            <div className="about-heading"><div className="eyebrow"><Sparkles size={14} /> {active.eyebrow}</div><h2>{active.title}</h2></div>
+            <p>{active.body}</p>
+          </div>
+          <div className={featureClass}>
+            {active.features.map((feature, featureIndex) => {
+              const StrengthIcon = strengthIcons[featureIndex];
+              return <article className={`about-feature-card ${feature.image ? "has-image" : ""}`} key={feature.title}>
+                {feature.image && <div className="about-feature-image"><Image src={feature.image} alt={feature.imageAlt} fill sizes="(max-width: 640px) 46vw, 34vw" unoptimized={active.layout === "leadership"} /></div>}
+                {feature.initials && <div className="leader-initials" aria-hidden="true">{feature.initials}</div>}
+                {active.layout === "strengths" && <><div className="strength-index" aria-hidden="true">{feature.number}</div><StrengthIcon className="strength-icon" aria-hidden="true" strokeWidth={1.8} /></>}
+                <div className="about-feature-copy"><span>{feature.number}</span><h3>{feature.title}</h3><p>{feature.text}</p></div>
+              </article>;
+            })}
+          </div>
         </div>
-        <button type="button" className="about-next" onClick={() => go(index + 1)} aria-label={`Next: ${content.slides[(index + 1) % total].label}`}>
-          <ArrowRight aria-hidden="true" />
-          <span>{content.slides[(index + 1) % total].label}</span>
-        </button>
+        <button type="button" className="about-next" onClick={() => go(index + 1)} aria-label={`Next: ${content.slides[(index + 1) % total].label}`}><ArrowRight aria-hidden="true" /><span>{content.slides[(index + 1) % total].label}</span></button>
         <div className="about-tabs" aria-label="About section pages">
           {content.slides.map((slide, slideIndex) => <button key={slide.id} type="button" className={slideIndex === index ? "active" : ""} onClick={() => setIndex(slideIndex)} aria-current={slideIndex === index ? "true" : undefined}>{slide.label}</button>)}
         </div>
@@ -185,44 +160,24 @@ function HomeAboutCarousel({ content }) {
 }
 
 export default function CinematicHome({ content }) {
-  const root = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
   useEffect(() => {
     if (content.hero.slides.length < 2) return;
-    const timer = window.setInterval(() => {
-      setActiveSlide(index => (index + 1) % content.hero.slides.length);
-    }, 6000);
+    const timer = window.setInterval(() => setActiveSlide(index => (index + 1) % content.hero.slides.length), 6000);
     return () => window.clearInterval(timer);
   }, [content.hero.slides.length]);
 
+  const slide = content.hero.slides[activeSlide];
+
   return (
-    <div ref={root} className="site-wrap">
+    <div className="site-wrap">
       <Navigation items={content.navigation} />
       <main id="main-content">
         <section id="home" className="hero" aria-roledescription="carousel" aria-label="PrimeShow cinematic stories">
           <div className="hero-slides" aria-live="off">
-            {content.hero.slides.map((slide, index) => (
-              <div
-                key={slide.image}
-                className={`hero-slide hero-slide-${index + 1} ${index === activeSlide ? "is-active" : ""}`}
-                style={{ "--hero-position": slide.position, "--hero-mobile-position": slide.mobilePosition }}
-                aria-hidden={index !== activeSlide}
-              >
-                <picture className="hero-picture" style={{ position: "absolute", inset: 0, display: "block", width: "100%", height: "100%" }}>
-                  <source media="(max-width: 640px)" srcSet={slide.image.replace("-optimized.webp", "-mobile.webp")} />
-                  <img
-                    src={slide.image}
-                    alt={index === activeSlide ? slide.alt : ""}
-                    width="1672"
-                    height="942"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                    decoding="async"
-                    className="hero-image"
-                  />
-                </picture>
-              </div>
-            ))}
+            <div className={`hero-slide hero-slide-${activeSlide + 1} is-active`} style={{ "--hero-position": slide.position, "--hero-mobile-position": slide.mobilePosition }}>
+              <img src={slide.image} alt={slide.alt} width="1672" height="942" fetchPriority="high" decoding="async" className="hero-image" />
+            </div>
           </div>
           <div className="hero-overlay" /><div className="ambient-light" /><div className="grain" aria-hidden="true" />
           <div className="hero-content container">
@@ -235,20 +190,11 @@ export default function CinematicHome({ content }) {
         </section>
 
         <section id="impact" className="stats-section section"><div className="section-glow" /><div className="container stats-grid">{content.statistics.map((item) => <Counter key={item.label} item={item} />)}</div></section>
-
         <HomeAboutCarousel content={content.about} />
-
         <section id="productions" className="productions section"><div className="container section-head" data-reveal><div><div className="eyebrow">PrimeShow originals</div><h2>Stories built<br /><em>for the big screen.</em></h2></div><p>Distinctive voices. Unforgettable worlds. A slate powered by bold creative ambition.</p></div><MovieRail movies={content.productions} /><div className="container section-action"><MagneticButton href="/services/production" className="button-line">View All Productions</MagneticButton></div></section>
-
-        <div className="home-distribution-wrap">
-          <RollingDistributionGallery movies={content.distribution} compact />
-          <div className="container section-action centered-action"><MagneticButton href="/services/distribution" className="button-line">View All Distribution</MagneticButton></div>
-        </div>
-
+        <div className="home-distribution-wrap"><RollingDistributionGallery movies={content.distribution} compact /><div className="container section-action centered-action"><MagneticButton href="/services/distribution" className="button-line">View All Distribution</MagneticButton></div></div>
         <ProcessImpact content={content.processImpact} />
-
         <section id="primeverse" className="hub-cta section"><div className="container"><div className="eyebrow">Primeverse</div><h2>Closer to the stories<br />you love.</h2><p>Behind the scenes, new worlds, and the people bringing every frame to life.</p><Link href="/prime-hub" className="circle-link" aria-label="Enter Primeverse"><ArrowRight /></Link></div></section>
-
         <HomeContact />
       </main>
       <footer><div className="container"><Brand /><p>Indian storytelling. Global cinematic scale.</p><span>© {new Date().getFullYear()} PrimeShow Entertainment</span><span className="footer-credit">Website created by Mahendar Reddy Sama</span></div></footer>
