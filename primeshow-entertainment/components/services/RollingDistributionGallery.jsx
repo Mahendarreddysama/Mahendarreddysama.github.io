@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const rowOffsets = [0, 2, 4];
 
@@ -24,39 +22,13 @@ function galleryStyle(movie) {
 }
 
 export default function RollingDistributionGallery({ movies, compact = false }) {
-  const root = useRef(null);
   const rows = useMemo(() => rowOffsets.map((offset) => {
     const source = movies.length ? movies : [{ slug: "hanuman", title: "PrimeShow Release", poster: "/images/posters/hanuman.webp" }];
     return Array.from({ length: 10 }, (_, index) => source[(index + offset) % source.length]);
   }), [movies]);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const context = gsap.context(() => {
-      if (reduced) return;
-      gsap.utils.toArray(".distribution-roll-row").forEach((row, index) => {
-        const direction = index % 2 === 0 ? -1 : 1;
-        gsap.fromTo(row,
-          { xPercent: direction < 0 ? 3 : -20 },
-          {
-            xPercent: direction < 0 ? -20 : 3,
-            ease: "none",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          },
-        );
-      });
-    }, root);
-    return () => context.revert();
-  }, []);
-
   return (
-    <section ref={root} className={`distribution-roll ${compact ? "is-compact" : ""}`} aria-labelledby={compact ? "home-distribution-title" : "distribution-gallery-title"}>
+    <section className={`distribution-roll ${compact ? "is-compact" : ""}`} aria-labelledby={compact ? "home-distribution-title" : "distribution-gallery-title"}>
       <div className="distribution-roll-intro container">
         <div className="distribution-roll-title">
           <div className="eyebrow">Across screens. Across borders.</div>
