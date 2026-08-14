@@ -65,32 +65,21 @@ html[data-theme="light"] .about-longform :is(.chapter-01,.chapter-04) .chapter-m
 /* Features landing / Light state — page background white, image cards retain their original overlays/colors. */
 html[data-theme="light"] .services-theme:not(:has(.division-hero)) main,
 html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro,
-html[data-theme="light"] .services-theme:not(:has(.division-hero)) .service-card-stage{
-  background:#fff!important;
-  background-image:none!important;
-}
+html[data-theme="light"] .services-theme:not(:has(.division-hero)) .service-card-stage{background:#fff!important;background-image:none!important}
 html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro:before{background:linear-gradient(90deg,transparent 49.8%,rgba(0,0,0,.07) 50%,transparent 50.2%)!important}
 html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro :is(h1,p){color:#111!important;text-shadow:none!important}
-/* Preserve gold/highlight accent text and icons. */
 html[data-theme="light"] .services-theme:not(:has(.division-hero)) .services-intro :is(.eyebrow,h1 em,.services-down){color:var(--gold)!important}
 html[data-theme="light"] .services-theme:not(:has(.division-hero)) .service-portal :is(.portal-number,.portal-copy small,.portal-copy h2,.portal-copy p,.portal-link){color:inherit}
 
 /* Production page / Light state — requested white sections only. */
-html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section,.services-next){
-  background:#fff!important;
-  background-image:none!important;
-  color:#111!important;
-}
+html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section,.services-next){background:#fff!important;background-image:none!important;color:#111!important}
 html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section,.services-next) .section-head h2,
 html[data-theme="light"] .services-theme:has(.division-production) :is(.service-overview,.catalog-feature,.trailer-section) .section-head>p,
 html[data-theme="light"] .services-theme:has(.division-production) .services-next h2,
 html[data-theme="light"] .services-theme:has(.division-production) .catalog-meta h3,
 html[data-theme="light"] .services-theme:has(.division-production) .trailer-card>div:last-child h3,
 html[data-theme="light"] .services-theme:has(.division-production) .catalog-search input,
-html[data-theme="light"] .services-theme:has(.division-production) .services-next .button-line{
-  color:#111!important;
-  text-shadow:none!important;
-}
+html[data-theme="light"] .services-theme:has(.division-production) .services-next .button-line{color:#111!important;text-shadow:none!important}
 html[data-theme="light"] .services-theme:has(.division-production) .capability-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.11)!important;box-shadow:0 14px 36px rgba(0,0,0,.05)}
 html[data-theme="light"] .services-theme:has(.division-production) .capability-card h3{color:#111!important}
 html[data-theme="light"] .services-theme:has(.division-production) .catalog-search{background:#f7f7f7!important;border-color:rgba(0,0,0,.14)!important}
@@ -99,17 +88,12 @@ html[data-theme="light"] .services-theme:has(.division-production) .catalog-card
 html[data-theme="light"] .services-theme:has(.division-production) .catalog-card .catalog-meta small,
 html[data-theme="light"] .services-theme:has(.division-production) .trailer-card>div:last-child p{color:#555!important}
 html[data-theme="light"] .services-theme:has(.division-production) .services-next .button-line{border-bottom-color:rgba(0,0,0,.45)!important}
-/* Preserve existing orange/gold accents and poster/video overlays. */
 html[data-theme="light"] .services-theme:has(.division-production) :is(.eyebrow,.section-head h2 em,.services-next h2 em,.capability-card svg){color:var(--gold)!important}
 html[data-theme="light"] .services-theme:has(.division-production) :is(.catalog-art,.trailer-art) :is(.status,.catalog-hover,.catalog-hover p,.catalog-hover small,.trailer-play){color:#f8f2e9!important}
 
 /* Distribution page / Light state — requested white sections only. */
 html[data-theme="light"] .services-theme:has(.division-distribution) :is(.service-overview,.distribution-roll,.distribution-library,.services-next),
-html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-stage{
-  background:#fff!important;
-  background-image:none!important;
-  color:#111!important;
-}
+html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-stage{background:#fff!important;background-image:none!important;color:#111!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-rows:after{background:linear-gradient(90deg,#fff 0,transparent 8%,transparent 92%,#fff 100%)!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) .service-overview .section-head h2,
 html[data-theme="light"] .services-theme:has(.division-distribution) .service-overview .section-head>p,
@@ -120,10 +104,7 @@ html[data-theme="light"] .services-theme:has(.division-distribution) .distributi
 html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-title-row h3,
 html[data-theme="light"] .services-theme:has(.division-distribution) .catalog-search input,
 html[data-theme="light"] .services-theme:has(.division-distribution) .services-next h2,
-html[data-theme="light"] .services-theme:has(.division-distribution) .services-next .button-line{
-  color:#111!important;
-  text-shadow:none!important;
-}
+html[data-theme="light"] .services-theme:has(.division-distribution) .services-next .button-line{color:#111!important;text-shadow:none!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) .capability-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.11)!important;box-shadow:0 14px 36px rgba(0,0,0,.05)}
 html[data-theme="light"] .services-theme:has(.division-distribution) .capability-card h3{color:#111!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) .catalog-search{background:#f7f7f7!important;border-color:rgba(0,0,0,.14)!important}
@@ -132,9 +113,49 @@ html[data-theme="light"] .services-theme:has(.division-distribution) .distributi
 html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-title-row :is(p,small){color:#555!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) :is(.catalog-note,.empty-catalog){color:#555!important;border-color:rgba(0,0,0,.12)!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) .services-next .button-line{border-bottom-color:rgba(0,0,0,.45)!important}
-/* Preserve existing orange/gold accents; frame labels stay light because they sit over release images. */
 html[data-theme="light"] .services-theme:has(.division-distribution) :is(.eyebrow,.section-head h2 em,.distribution-roll-title h2 em,.services-next h2 em,.capability-card svg){color:var(--gold)!important}
 html[data-theme="light"] .services-theme:has(.division-distribution) .distribution-roll-frame span{color:#f8f2e9!important}
+
+/* Exhibition page / Light state — requested white sections only. */
+html[data-theme="light"] .services-theme:has(.division-exhibition) :is(.service-overview,.exhibition-flow,.theatre-gallery,.services-next){background:#fff!important;background-image:none!important;color:#111!important}
+html[data-theme="light"] .services-theme:has(.division-exhibition) :is(.service-overview,.exhibition-flow,.theatre-gallery) .section-head h2,
+html[data-theme="light"] .services-theme:has(.division-exhibition) .workflow-timeline h3,
+html[data-theme="light"] .services-theme:has(.division-exhibition) .services-next h2,
+html[data-theme="light"] .services-theme:has(.division-exhibition) .services-next .button-line{color:#111!important;text-shadow:none!important}
+html[data-theme="light"] .services-theme:has(.division-exhibition) .capability-card{background:#f7f7f7!important;border-color:rgba(0,0,0,.11)!important;box-shadow:0 14px 36px rgba(0,0,0,.05)}
+html[data-theme="light"] .services-theme:has(.division-exhibition) .capability-card h3{color:#111!important}
+html[data-theme="light"] .services-theme:has(.division-exhibition) .workflow-timeline li{border-bottom-color:rgba(0,0,0,.1)!important}
+html[data-theme="light"] .services-theme:has(.division-exhibition) .workflow-timeline i{background:#fff!important}
+html[data-theme="light"] .services-theme:has(.division-exhibition) .services-next .button-line{border-bottom-color:rgba(0,0,0,.45)!important}
+html[data-theme="light"] .services-theme:has(.division-exhibition) :is(.eyebrow,.section-head h2 em,.services-next h2 em,.capability-card svg,.workflow-timeline li>span){color:var(--gold)!important}
+/* Gallery labels remain light because they sit directly over cinema images. */
+html[data-theme="light"] .services-theme:has(.division-exhibition) .cinema-frame span{color:#f8f2e9!important}
+
+/* Primeverse / Light state — editorial, quizzes, BTS, upcoming, awards, and Continue Exploring. */
+html[data-theme="light"] .hub-theme :is(.hub-section,.continue-exploring){background:#fff!important;background-image:none!important;color:#111!important}
+html[data-theme="light"] .hub-theme .hub-section .section-head h2,
+html[data-theme="light"] .hub-theme .quiz-card h3,
+html[data-theme="light"] .hub-theme .upcoming-card h3,
+html[data-theme="light"] .hub-theme .award-timeline h3,
+html[data-theme="light"] .hub-theme .continue-exploring h2,
+html[data-theme="light"] .hub-theme .continue-grid strong{color:#111!important;text-shadow:none!important}
+html[data-theme="light"] .hub-theme .quiz-card,
+html[data-theme="light"] .hub-theme .upcoming-card,
+html[data-theme="light"] .hub-theme .continue-grid a{border-color:rgba(0,0,0,.11)!important}
+html[data-theme="light"] .hub-theme .quiz-card{background:linear-gradient(135deg,rgba(240,154,34,.1),rgba(0,0,0,.018))!important}
+html[data-theme="light"] .hub-theme .upcoming-card{background:rgba(0,0,0,.018)!important}
+html[data-theme="light"] .hub-theme .continue-grid a{background:linear-gradient(145deg,rgba(0,0,0,.025),rgba(240,154,34,.035))!important}
+html[data-theme="light"] .hub-theme .award-icon{background:#f7f7f7!important}
+/* Preserve PrimeShow gold/highlight accents exactly. */
+html[data-theme="light"] .hub-theme :is(.hub-section,.continue-exploring) .eyebrow,
+html[data-theme="light"] .hub-theme :is(.hub-section,.continue-exploring) h2 em,
+html[data-theme="light"] .hub-theme :is(.hub-section,.continue-exploring) :is(.article-copy span,.article-copy b,.quiz-card b,.quiz-card>div>span,.upcoming-card small,.upcoming-card b,.award-year,.award-icon,.award-timeline small,.continue-grid a>svg:last-child){color:var(--gold)!important}
+/* Text placed directly on photos remains light for image contrast. */
+html[data-theme="light"] .hub-theme .article-card .article-copy :is(h3,p,small),
+html[data-theme="light"] .hub-theme .hub-masonry button span,
+html[data-theme="light"] .hub-theme .hub-masonry button span :is(strong,small),
+html[data-theme="light"] .hub-theme .quiz-poster .quiz-play,
+html[data-theme="light"] .hub-theme .upcoming-art .status{color:#f8f2e9!important}
 
 /* Distribution image rail movement stays compositor-friendly. */
 .distribution-roll-row{will-change:transform;transition:transform .08s linear}
