@@ -1,2 +1,0 @@
-:HL["/_next/static/chunks/00.~ncehil3ui.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"movies","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"brb","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"mGR2HvJ7-iaklVzDDIUj2"}
