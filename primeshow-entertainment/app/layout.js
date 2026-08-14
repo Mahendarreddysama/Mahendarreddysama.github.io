@@ -2,7 +2,6 @@ import CinematicMotion from "../components/motion/CinematicMotion";
 import Analytics from "../components/Analytics";
 import JsonLd from "../components/JsonLd";
 import WhatsAppFloatingButton from "../components/WhatsAppFloatingButton";
-import ThemeToggle from "../components/layout/ThemeToggle";
 import { absoluteUrl,publicSocialProfiles,siteConfig } from "@/content/site";
 import "./globals.css";
 import "./mobile-performance.css";
@@ -51,7 +50,6 @@ export default function RootLayout({ children }) {
       <head><script dangerouslySetInnerHTML={{__html:themeInit}} /></head>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <div className="home-global-theme-toggle"><ThemeToggle /></div>
         <CinematicMotion>{children}</CinematicMotion>
         <JsonLd data={[organizationSchema,websiteSchema]}/>
         <Analytics/>
