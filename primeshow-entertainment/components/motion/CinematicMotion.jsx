@@ -8,6 +8,11 @@ export default function CinematicMotion({ children }) {
     const finePointer = window.matchMedia("(pointer:fine) and (min-width:1001px)").matches;
     const cursor = document.querySelector(".global-cursor");
     const progress = document.querySelector(".global-scroll-progress");
+    const movieRails = [...document.querySelectorAll(".movie-rail")];
+
+    movieRails.forEach((rail) => {
+      rail.style.touchAction = "pan-y";
+    });
 
     let cursorFrame = 0;
     const moveCursor = (event) => {
@@ -25,15 +30,31 @@ export default function CinematicMotion({ children }) {
       progress.style.transform = `scaleX(${amount})`;
     };
 
+    const allowVerticalRailScroll = (event) => {
+      if (!(event.target instanceof Element)) return;
+      if (!event.target.closest(".movie-rail")) return;
+      if (event.shiftKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+
+      // The Home and Production rails have their own wheel handlers that convert
+      // vertical wheel input to horizontal movement. Stop those target handlers
+      // during capture, but do not prevent the browser's normal vertical scroll.
+      event.stopPropagation();
+    };
+
     if (finePointer && !reduced) {
       window.addEventListener("pointermove", moveCursor, { passive: true });
     }
     window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("wheel", allowVerticalRailScroll, { capture: true, passive: true });
     updateProgress();
 
     return () => {
       window.removeEventListener("pointermove", moveCursor);
       window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("wheel", allowVerticalRailScroll, true);
+      movieRails.forEach((rail) => {
+        rail.style.removeProperty("touch-action");
+      });
       if (cursorFrame) cancelAnimationFrame(cursorFrame);
     };
   }, []);
