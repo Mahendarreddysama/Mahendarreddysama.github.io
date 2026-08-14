@@ -1,3 +1,3 @@
 :HL["/_next/static/chunks/00.~ncehil3ui.css","style"]
-:HL["/_next/static/chunks/0o5.eiab3bg-d.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"prime-hub","param":null,"prefetchHints":0,"slots":{"children":{"name":"articles","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"cinema-without-borders","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"mYRtbhkeyBIRhjE2_tTzA"}
+:HL["/_next/static/chunks/008q2wxe6x3xw.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"prime-hub","param":null,"prefetchHints":0,"slots":{"children":{"name":"articles","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"cinema-without-borders","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"kASHU2wCAO4bMbPsHhAGZ"}
