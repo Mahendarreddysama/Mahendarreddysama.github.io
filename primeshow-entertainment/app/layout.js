@@ -6,6 +6,7 @@ import { absoluteUrl,publicSocialProfiles,siteConfig } from "@/content/site";
 import "./globals.css";
 import "./mobile-performance.css";
 import "./theme.css";
+import "./detail-light.css";
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
