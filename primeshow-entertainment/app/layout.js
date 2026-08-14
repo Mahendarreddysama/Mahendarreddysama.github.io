@@ -21,7 +21,7 @@ export const metadata = {
   },
   twitter:{card:"summary_large_image",title:"PrimeShow Entertainment",description:"Indian storytelling. Global cinematic scale.",images:[absoluteUrl(siteConfig.defaultImage)]},
   robots: { index: true, follow: true },
-  applicationName:siteConfig.name,authors:[{name:siteConfig.name}],creator:siteConfig.name,publisher:siteConfig.name,category:"Entertainment",icons:{icon:"/images/primeshow-logo.png",shortcut:"/images/primeshow-logo.png",apple:"/images/primeshow-logo.png"},verification:{google:process.env.GOOGLE_SITE_VERIFICATION||undefined},
+  applicationName:siteConfig.name,authors:[{name:siteConfig.name}],creator:siteConfig.name,publisher:siteConfig.name,category:"Entertainment",icons:{icon:{url:"/favicon.png",type:"image/png"},shortcut:"/favicon.png",apple:"/favicon.png"},verification:{google:process.env.GOOGLE_SITE_VERIFICATION||undefined},
   other: { "codex-preview": "development" },
 };
 
