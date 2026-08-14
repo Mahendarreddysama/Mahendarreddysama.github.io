@@ -4,6 +4,7 @@ import JsonLd from "../components/JsonLd";
 import WhatsAppFloatingButton from "../components/WhatsAppFloatingButton";
 import { absoluteUrl,publicSocialProfiles,siteConfig } from "@/content/site";
 import "./globals.css";
+import "./mobile-performance.css";
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
