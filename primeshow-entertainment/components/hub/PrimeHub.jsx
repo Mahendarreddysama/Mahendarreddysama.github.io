@@ -16,7 +16,16 @@ const tabs=["Articles","Movie Quizzes","Behind the Scenes","Upcoming Projects","
 export default function PrimeHub({content,navigation}) {
   const root=useRef(null); const swipeStart=useRef(null); const [active,setActive]=useState(tabs[0]); const [query,setQuery]=useState(""); const [lightbox,setLightbox]=useState(null);
   const featuredQuizHref=content.quizzes[0]?`/prime-hub/quizzes/${content.quizzes[0].slug}`:"#quizzes";
-  useEffect(()=>{const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;gsap.registerPlugin(ScrollTrigger);const ctx=gsap.context(()=>{if(!reduced)gsap.utils.toArray("[data-hub-reveal]").forEach(el=>gsap.fromTo(el,{y:38,opacity:0},{y:0,opacity:1,duration:.8,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 88%"}}))},root);return()=>{ctx.revert()}},[]);
+  useEffect(()=>{
+    const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile=matchMedia("(max-width: 900px)").matches;
+    if(reduced||mobile) return;
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx=gsap.context(()=>{
+      gsap.utils.toArray("[data-hub-reveal]").forEach(el=>gsap.fromTo(el,{y:38,opacity:0},{y:0,opacity:1,duration:.8,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 88%"}}));
+    },root);
+    return()=>{ctx.revert()};
+  },[]);
   useEffect(()=>{const onKey=e=>{if(lightbox===null)return;if(e.key==="Escape")setLightbox(null);if(e.key==="ArrowRight")setLightbox((lightbox+1)%content.galleries.length);if(e.key==="ArrowLeft")setLightbox((lightbox-1+content.galleries.length)%content.galleries.length)};window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey)},[lightbox,content.galleries.length]);
   const results=useMemo(()=>{const q=query.trim().toLowerCase();if(!q)return[];return [
     ...content.articles.map(x=>({type:"Article",title:x.title,meta:x.category,href:`/prime-hub/articles/${x.slug}`})),
@@ -24,7 +33,7 @@ export default function PrimeHub({content,navigation}) {
     ...content.upcomingProjects.map(x=>({type:"Movie",title:x.title,meta:x.status,href:`/movies/${x.slug}`})),
     ...content.awards.map(x=>({type:"Award",title:x.movie,meta:x.category,href:"#awards"})),
   ].filter(x=>(x.title+" "+x.meta+" "+x.type).toLowerCase().includes(q))},[query,content]);
-  const switchTab=tab=>{setActive(tab);document.getElementById("hub-content")?.scrollIntoView({behavior:"smooth",block:"start"})};
+  const switchTab=tab=>{setActive(tab);document.getElementById("hub-content")?.scrollIntoView({behavior:matchMedia("(max-width: 900px)").matches?"auto":"smooth",block:"start"})};
   return <div ref={root} className="site-wrap hub-theme"><SiteHeader items={navigation} activeHref="/prime-hub" className="hub-header"/><main id="main-content">
     <section className="hub-hero"><Image src="/images/hero-studio.webp" alt="Cinematic production studio for Primeverse" fill priority sizes="100vw"/><div className="hub-hero-shade"/><div className="grain"/><motion.div className="container hub-hero-copy" initial={{opacity:0,y:42}} animate={{opacity:1,y:0}} transition={{duration:.9}}><div className="eyebrow"><Sparkles size={15}/> The stories behind the stories</div><h1>PRIME<em>VERSE</em></h1><p>Where Stories Continue Beyond the Screen.</p><div className="hero-actions"><ButtonLink href="#hub-content">Explore Articles</ButtonLink><ButtonLink href={featuredQuizHref} variant="glass">Play Movie Quiz</ButtonLink></div></motion.div><a className="scroll-cue" href="#hub-content">Enter Primeverse <ArrowDown size={16}/></a></section>
     <section className="hub-nav-stage" id="hub-content"><div className="container"><div className="hub-search-wrap"><label className="hub-search"><Search/><span className="sr-only">Search Primeverse</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search movies, articles, awards and quizzes"/></label>{query&&<div className="hub-search-results" role="status">{results.length?results.map((r,i)=><Link key={`${r.type}-${i}`} href={r.href} onClick={()=>setQuery("")}><span>{r.type}</span><strong>{r.title}</strong><small>{r.meta}</small><ArrowRight/></Link>):<p>No results found.</p>}</div>}</div><div className="hub-tabs" role="tablist" aria-label="Primeverse sections">{tabs.map(tab=><button key={tab} role="tab" aria-selected={active===tab} className={active===tab?"active":""} onClick={()=>switchTab(tab)}>{tab}</button>)}</div></div></section>
